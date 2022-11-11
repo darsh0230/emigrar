@@ -1,3 +1,4 @@
+import 'package:emigrar/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,10 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Emigrar',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.white,
       ),
-      home: Scaffold(),
+      home: HomeScreen(),
     );
   }
 }
