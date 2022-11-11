@@ -15,7 +15,7 @@ class _HomeRootState extends State<HomeRoot> {
   Widget build(BuildContext context) {
     CC cc = CC();
     return Container(
-      color: cc.Black,
+      color: cc.black,
       child: Text("Home page"),
     );
   }

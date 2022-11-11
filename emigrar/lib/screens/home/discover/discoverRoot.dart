@@ -15,7 +15,7 @@ class _DiscoverRootState extends State<DiscoverRoot> {
   Widget build(BuildContext context) {
     CC cc = CC();
     return Container(
-      color: cc.Black,
+      color: cc.black,
       child: Text("Discover"),
     );
   }

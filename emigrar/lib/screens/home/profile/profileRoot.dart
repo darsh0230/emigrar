@@ -15,7 +15,7 @@ class _ProfileRootState extends State<ProfileRoot> {
   Widget build(BuildContext context) {
     CC cc = CC();
     return Container(
-      color: cc.Black,
+      color: cc.black,
       child: Text("Profile"),
     );
   }
