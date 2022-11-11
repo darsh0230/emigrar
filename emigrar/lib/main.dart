@@ -1,3 +1,4 @@
+import 'package:emigrar/screens/auth/loginScreen.dart';
 import 'package:emigrar/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }
