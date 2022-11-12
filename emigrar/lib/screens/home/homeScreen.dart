@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
             decoration: NavBarDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              colorBehindNavBar: Colors.white,
+              colorBehindNavBar: cc.white,
             ),
             popAllScreensOnTapOfSelectedTab: true,
             popActionScreens: PopActionScreensType.all,
