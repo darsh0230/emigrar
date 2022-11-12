@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:emigrar/constants/constantColors.dart';
+import 'package:emigrar/providers/utilProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:provider/provider.dart';
 
 class MapsRoot extends StatefulWidget {
   const MapsRoot({Key? key}) : super(key: key);
@@ -27,11 +29,6 @@ class _MapsRootState extends State<MapsRoot> {
   bool? _serviceEnabled;
   PermissionStatus? _permissionGranted;
 
-  GoogleMapController? mapsController;
-  Location locationTracker = new Location();
-  LocationData? newLoactionData;
-  Set<Marker> mapsMarkers = {};
-
   List<LatLng> polylineCoordinates = [
     // LatLng(13.0366, 77.5630),
     // LatLng(13.0366, 77.5632)
@@ -48,7 +45,7 @@ class _MapsRootState extends State<MapsRoot> {
   void updateMarkerAndCircle(newLocData) {
     LatLng latlng = LatLng(newLocData.latitude, newLocData.longitude);
     setState(() {
-      mapsMarkers.add(Marker(
+      context.read<UtilProvider>().addMarkers(Marker(
           markerId: MarkerId('my_loc'),
           position: latlng,
           draggable: false,
@@ -64,16 +61,6 @@ class _MapsRootState extends State<MapsRoot> {
         polylineCoordinates
             .add(LatLng(newLocData.latitude, newLocData.longitude));
     });
-  }
-
-  Future<void> gotoLocation(double? lat, double? long) async {
-    final GoogleMapController controller = mapsController!;
-    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      target: LatLng(lat!, long!),
-      zoom: 15,
-      // tilt: 50.0,
-      bearing: 45.0,
-    )));
   }
 
   Future<void> _onMapCreated(controller) async {
@@ -139,12 +126,28 @@ class _MapsRootState extends State<MapsRoot> {
           GoogleMap(
             mapType: MapType.normal,
             initialCameraPosition: _initialCameraPosition,
-            markers: mapsMarkers,
+            markers: context.read<UtilProvider>().mapsMarkers,
             polylines: Set<Polyline>.of(polylines.values),
             onMapCreated: _onMapCreated,
           ),
         ],
       ),
     );
+  }
+}
+
+GoogleMapController? mapsController;
+Location locationTracker = Location();
+LocationData? newLoactionData;
+
+Future<void> gotoLocation(double? lat, double? long) async {
+  if (mapsController != null) {
+    final GoogleMapController controller = mapsController!;
+    controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(lat!, long!),
+      zoom: 15,
+      // tilt: 50.0,
+      bearing: 45.0,
+    )));
   }
 }

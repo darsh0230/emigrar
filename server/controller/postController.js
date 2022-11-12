@@ -7,7 +7,7 @@ export const createPost = async (req, res) => {
 
   const post = await postModel.create({
     uid,
-    imgUrl: `/cdn/${req.file.filename}`,
+    imgUrl: `cdn/${req.file.filename}`,
     caption,
     location: JSON.parse(location.toString()),
   });

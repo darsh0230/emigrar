@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:emigrar/constants/constantColors.dart';
 import 'package:emigrar/providers/utilProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class NavBarWidget extends StatefulWidget {
@@ -145,7 +144,18 @@ Future<void> _addBtnDialog(BuildContext context) async {
                     height: 24.0,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                      AlertDialog(
+                        backgroundColor: CC().black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            24.0,
+                          ),
+                        ),
+                        content: Text("data"),
+                      );
+                    },
                     child: Text(
                       "Add a Post",
                       style: TextStyle(fontSize: 18, color: cc.white),
@@ -161,7 +171,7 @@ Future<void> _addBtnDialog(BuildContext context) async {
                       context.read<UtilProvider>().changecurrNavBarIndex(2);
                     },
                     child: Text(
-                      "Start your Treak",
+                      "Start your Trek",
                       style: TextStyle(fontSize: 18, color: cc.white),
                     ),
                   )

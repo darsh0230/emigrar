@@ -4,6 +4,7 @@ import 'package:emigrar/screens/auth/loginScreen.dart';
 import 'package:emigrar/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -29,7 +30,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: cc.black,
       ),
-      home: const HomeScreen(),
+      home: AnimatedSplashScreen(
+        duration: 2000,
+        splashTransition: SplashTransition.fadeTransition,
+        backgroundColor: cc.black,
+        splash: SizedBox(
+          width: 250.0,
+          height: 250.0,
+          child: Image.asset("assets/images/logo1.png"),
+        ),
+        nextScreen: const HomeScreen(),
+      ),
     );
   }
 }

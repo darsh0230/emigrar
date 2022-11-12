@@ -17,7 +17,7 @@ Future<List<Post>> getPosts() async {
     if (response.statusCode == 200) {
       List<Post> posts = [];
 
-      var postsData = jsonDecode(response.body.toString());
+      var postsData = jsonDecode(response.body.toString())["result"];
 
       for (var post in postsData) {
         posts.add(Post.fromJson(post));
@@ -27,6 +27,7 @@ Future<List<Post>> getPosts() async {
     }
     return [];
   } catch (e) {
+    print(e);
     return [];
   }
 }

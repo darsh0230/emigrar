@@ -17,13 +17,12 @@ class Post {
   late final String updatedAt;
 
   Post.fromJson(Map<String, dynamic> json) {
-    uid = json['uid'];
-    imgUrl = json['imgUrl'];
-    caption = json['caption'];
+    uid = json['uid'] ?? "";
+    imgUrl = json['imgUrl'] ?? "";
+    caption = json['caption'] ?? "";
     location = Location.fromJson(json['location']);
-    id = json['id'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
+    id = json['id'] ?? "";
+    createdAt = json['createdAt'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -48,8 +47,8 @@ class Location {
   late final double longitude;
 
   Location.fromJson(Map<String, dynamic> json) {
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+    latitude = json['latitude'] ?? 0.0;
+    longitude = json['longitude'] ?? 0.0;
   }
 
   Map<String, dynamic> toJson() {

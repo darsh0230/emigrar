@@ -101,6 +101,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
+            child: Container(
+              width: double.infinity,
+              height: 120.0,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment(0, -1),
+                      end: Alignment(0, 0),
+                      colors: [Color(0x00000000), Color(0xcc000000)]),
+                  color: Color(0xbb000000)),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
             child: NavBarWidget(),
           )
         ],
