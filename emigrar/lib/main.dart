@@ -1,3 +1,4 @@
+import 'package:emigrar/constants/constantColors.dart';
 import 'package:emigrar/providers/utilProvider.dart';
 import 'package:emigrar/screens/auth/loginScreen.dart';
 import 'package:emigrar/screens/home/homeScreen.dart';
@@ -11,7 +12,7 @@ void main() {
         create: (_) => UtilProvider(),
       ),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -21,13 +22,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    CC cc = CC();
     return MaterialApp(
       title: 'Emigrar',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xff1E1E1E),
+        primaryColor: cc.black,
       ),
-      home: LoginScreen(),
+      home: const HomeScreen(),
     );
   }
 }

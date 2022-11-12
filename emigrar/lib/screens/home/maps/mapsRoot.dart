@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:emigrar/constants/constantColors.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +38,13 @@ class _MapsRootState extends State<MapsRoot> {
   ];
   Map<PolylineId, Polyline> polylines = {};
 
+  bool checkCoordinates(oldLat, oldLong, newLat, newLong) {
+    if (math.sqrt(
+            math.pow(oldLat - newLat, 2) + math.pow(oldLong - newLong, 2)) >
+        0.0001) return true;
+    return false;
+  }
+
   void updateMarkerAndCircle(newLocData) {
     LatLng latlng = LatLng(newLocData.latitude, newLocData.longitude);
     setState(() {
@@ -47,9 +55,14 @@ class _MapsRootState extends State<MapsRoot> {
           // icon: curLocIcon,
           icon: BitmapDescriptor.defaultMarkerWithHue(
               BitmapDescriptor.hueViolet)));
-
-      polylineCoordinates
-          .add(LatLng(newLocData.latitude, newLocData.longitude));
+      if (polylineCoordinates.isNotEmpty &&
+          checkCoordinates(
+              polylineCoordinates[polylineCoordinates.length - 1].latitude,
+              polylineCoordinates[polylineCoordinates.length - 1].longitude,
+              newLocData.latitude,
+              newLocData.longitude))
+        polylineCoordinates
+            .add(LatLng(newLocData.latitude, newLocData.longitude));
     });
   }
 
@@ -94,6 +107,9 @@ class _MapsRootState extends State<MapsRoot> {
     newLoactionData = _locationData;
     updateMarkerAndCircle(_locationData);
     gotoLocation(_locationData.latitude, _locationData.longitude);
+    if (_locationData.latitude != null)
+      polylineCoordinates.add(LatLng(
+          _locationData.latitude ?? 0.0, _locationData.longitude ?? 0.0));
 
     locationTracker.onLocationChanged.listen((newLocData) {
       newLoactionData = newLocData;
@@ -108,7 +124,7 @@ class _MapsRootState extends State<MapsRoot> {
     super.initState();
     PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
-        polylineId: id, color: Colors.red, points: polylineCoordinates);
+        polylineId: id, color: CC().violet, points: polylineCoordinates);
     polylines[id] = polyline;
     setState(() {});
   }

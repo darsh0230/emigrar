@@ -92,11 +92,12 @@ Widget _navBarItem(
           color: context.watch<UtilProvider>().currNavBarIndex == index
               ? cc.violet
               : cc.white,
-          size: 36.0,
+          size: 32.0,
         ),
         Text(
           name ?? "",
           style: TextStyle(
+              fontSize: 12,
               color: context.watch<UtilProvider>().currNavBarIndex == index
                   ? cc.violet
                   : cc.white),
