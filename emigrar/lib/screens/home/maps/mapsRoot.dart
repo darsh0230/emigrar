@@ -15,7 +15,7 @@ class _MapsRootState extends State<MapsRoot> {
   Widget build(BuildContext context) {
     CC cc = CC();
     return Container(
-      color: cc.Black,
+      color: cc.black,
       child: Text("Maps"),
     );
   }

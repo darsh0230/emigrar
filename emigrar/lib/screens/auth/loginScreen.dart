@@ -1,3 +1,5 @@
+import 'package:emigrar/constants/constantColors.dart';
+import 'package:emigrar/screens/auth/registerScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    CC cc = CC();
     return Scaffold(
       backgroundColor: Color.fromARGB(210, 19, 19, 19),
       body: Stack(
@@ -21,8 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(left: 35, top: 130),
             child: Text(
               "Hello! Trekker",
-              style: TextStyle(
-                  color: Color.fromARGB(126, 26, 185, 164), fontSize: 40),
+              style: TextStyle(color: cc.violet, fontSize: 40),
             ),
           ),
           SingleChildScrollView(
@@ -37,10 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         TextField(
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 248, 244, 244)),
+                          style: TextStyle(color: cc.black, fontSize: 20),
                           decoration: InputDecoration(
-                              fillColor: Colors.grey.shade100,
+                              fillColor: cc.white,
                               filled: true,
                               hintText: "Email",
                               border: OutlineInputBorder(
@@ -51,10 +52,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 30,
                         ),
                         TextField(
-                          style: TextStyle(),
+                          style: TextStyle(color: cc.black, fontSize: 20),
                           obscureText: true,
                           decoration: InputDecoration(
-                              fillColor: Colors.grey.shade100,
+                              fillColor: cc.white,
                               filled: true,
                               hintText: "Password",
                               border: OutlineInputBorder(
@@ -68,17 +69,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Sign in ',
+                              'Login',
                               style: TextStyle(
-                                  color: Colors.blue,
+                                  color: cc.red,
                                   fontSize: 27,
                                   fontWeight: FontWeight.w700),
                             ),
                             CircleAvatar(
                               radius: 30,
-                              backgroundColor: Color.fromARGB(255, 30, 67, 176),
+                              backgroundColor: Colors.black12,
                               child: IconButton(
-                                  color: Color.fromARGB(255, 182, 9, 9),
+                                  color: cc.lBlack,
                                   onPressed: () {},
                                   icon: Icon(
                                     Icons.arrow_forward,
@@ -94,15 +95,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, 'register');
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            RegisterScreen()));
                               },
                               child: Text(
-                                'Sign Up',
+                                'Register',
                                 textAlign: TextAlign.left,
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    color: Color.fromARGB(255, 240, 241, 244),
-                                    fontSize: 18),
+                                style: TextStyle(color: cc.white, fontSize: 20),
                               ),
                               style: ButtonStyle(),
                             ),
@@ -111,8 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text(
                                   'Forgot Password',
                                   style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    color: Color.fromARGB(255, 229, 232, 241),
+                                    color: cc.white,
                                     fontSize: 18,
                                   ),
                                 )),

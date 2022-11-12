@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     CC cc = CC();
     return Scaffold(
-      backgroundColor: cc.Black,
+      backgroundColor: cc.black,
       body: Stack(
         children: [
           PersistentTabView(

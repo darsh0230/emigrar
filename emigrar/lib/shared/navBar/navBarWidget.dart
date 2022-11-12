@@ -21,7 +21,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
         padding: const EdgeInsets.only(bottom: 40, left: 10.0, right: 10.0),
         child: Container(
           decoration: BoxDecoration(
-              color: cc.LBlack, borderRadius: BorderRadius.circular(40.0)),
+              color: cc.black, borderRadius: BorderRadius.circular(40.0)),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 14.0),
             child: Row(
