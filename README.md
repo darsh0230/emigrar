@@ -1,7 +1,7 @@
 ## EMIGRAR
 
 Download our [APP](https://github.com/darsh0230/emigrar/releases/download/v0.2.1/emigrar.apk) \
-Check out our [video demo]()
+Check out our [video demo](https://youtu.be/TplG089KGzA)
 
 ## Demo
 
