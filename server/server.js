@@ -20,10 +20,10 @@ import errorHandlerMiddleware from "./middlewares/error_handler.js";
 
 const BASE_URL_PATH = "/api/v1/";
 const CONNECTION_URL = process.env.EXPAPP_MONGO_URL;
-const PORT = process.env.EXPAPP_PORT || 5000;
+const PORT = process.env.PORT || process.env.EXPAPP_PORT || 5000;
 
-if (!fs.existsSync("/uploads")) {
-  fs.mkdirSync("/uploads");
+if (!fs.existsSync("/app/uploads")) {
+  fs.mkdirSync("/app/uploads");
 }
 
 const app = express();
