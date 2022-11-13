@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Env {
-  final String baseUrl = "http://192.168.48.183:5000/api/v1/";
-  final String cdnUrl = "http://192.168.48.183:5000/";
+  final String baseUrl = "https://emigrar.herokuapp.com/api/v1/";
+  final String cdnUrl = "https://emigrar.herokuapp.com/";
 }

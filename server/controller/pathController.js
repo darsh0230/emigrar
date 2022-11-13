@@ -3,25 +3,27 @@ import pathModel from "../models/pathModel.js";
 import { BadRequestError, UnauthenticatedError } from "../utils/errors.js";
 
 export const createPath = async (req, res) => {
-  const { pathPolyLines } = req.body;
+  const { pathPolyLines, color } = req.body;
 
-  const path = pathModel.create({
+  const path = await pathModel.create({
     pathPolyLines,
+    color,
   });
 
-  res.StatusCodes(StatusCodes.CREATED).json({ result: path });
+  res.status(StatusCodes.CREATED).json({ result: path });
 };
 
 export const getPaths = async (req, res) => {
-  const { currLat, currLong } = req.body;
+  // const { currLat, currLong } = req.body;
 
-  const paths = pathModel.find();
+  const paths = await pathModel.find();
+  // console.log(paths);
 
-  var resultPaths = [];
+  // var resultPaths = paths;
 
-  for (var path in paths) {
-    console.log(path);
-  }
+  // for (var path in paths) {
+  //   console.log(path);
+  // }
 
-  res.StatusCodes(StatusCodes.OK).json({ result: resultPaths });
+  res.status(StatusCodes.OK).json({ result: paths });
 };

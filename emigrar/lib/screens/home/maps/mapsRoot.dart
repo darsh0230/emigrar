@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:emigrar/constants/constantColors.dart';
+import 'package:emigrar/models/pathModel.dart';
 import 'package:emigrar/providers/utilProvider.dart';
+import 'package:emigrar/services/getPaths.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +35,7 @@ class _MapsRootState extends State<MapsRoot> {
     // LatLng(13.0366, 77.5630),
     // LatLng(13.0366, 77.5632)
   ];
+  List<LatLng> allPathsCordinates = [];
   Map<PolylineId, Polyline> polylines = {};
 
   bool checkCoordinates(oldLat, oldLong, newLat, newLong) {
@@ -94,6 +97,7 @@ class _MapsRootState extends State<MapsRoot> {
     newLoactionData = _locationData;
     updateMarkerAndCircle(_locationData);
     gotoLocation(_locationData.latitude, _locationData.longitude);
+
     if (_locationData.latitude != null)
       polylineCoordinates.add(LatLng(
           _locationData.latitude ?? 0.0, _locationData.longitude ?? 0.0));
@@ -107,13 +111,33 @@ class _MapsRootState extends State<MapsRoot> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    PolylineId id = PolylineId("poly");
+
+    CC cc = CC();
+
+    PolylineId id = PolylineId("myLoc");
     Polyline polyline = Polyline(
         polylineId: id, color: CC().violet, points: polylineCoordinates);
     polylines[id] = polyline;
-    setState(() {});
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      List<Path> allPaths = await getPaths();
+      for (var path in allPaths) {
+        for (var pathCord in path.pathPolyLines ?? []) {
+          allPathsCordinates.add(LatLng(pathCord.latitude, pathCord.longitude));
+        }
+
+        PolylineId id = PolylineId(path.color ?? "ids");
+        Polyline polyline = Polyline(
+          polylineId: id,
+          color: cc.red,
+          points: allPathsCordinates,
+        );
+        polylines[id] = polyline;
+      }
+
+      setState(() {});
+    });
   }
 
   @override

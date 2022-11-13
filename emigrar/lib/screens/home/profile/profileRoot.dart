@@ -176,7 +176,7 @@ class _ProfileRootState extends State<ProfileRoot> {
                     ),
                     onPressed: () {
                       Fluttertoast.showToast(
-                        msg: "Comming Soon",
+                        msg: "Give Up on Your Dreams & Die",
                         toastLength: Toast.LENGTH_SHORT,
                       );
                     },
