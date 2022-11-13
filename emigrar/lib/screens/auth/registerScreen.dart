@@ -1,5 +1,7 @@
 import 'package:emigrar/constants/constantColors.dart';
 import 'package:emigrar/screens/auth/loginScreen.dart';
+import 'package:emigrar/screens/home/homeScreen.dart';
+import 'package:emigrar/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,6 +14,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     CC cc = CC();
@@ -72,9 +78,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: [
-                          makeInput(label: "Name"),
-                          makeInput(label: "Email"),
-                          makeInput(label: "Password", obsureText: true),
+                          makeInput(label: "Name", controller: nameController),
+                          makeInput(
+                              label: "Email", controller: emailController),
+                          makeInput(
+                            label: "Password",
+                            controller: passwordController,
+                            obsureText: true,
+                          ),
                           makeInput(label: "Confirm Pasword", obsureText: true)
                         ],
                       ),
@@ -93,7 +104,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: MaterialButton(
                           minWidth: double.infinity,
                           height: 60,
-                          onPressed: () {},
+                          onPressed: () async {
+                            if (await register(
+                                emailController.text,
+                                passwordController.text,
+                                nameController.text,
+                                context)) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                            }
+                          },
                           color: Colors.deepOrange,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40)),
@@ -144,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 }
 
-Widget makeInput({label, obsureText = false}) {
+Widget makeInput({label, controller, obsureText = false}) {
   CC cc = CC();
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,6 +181,7 @@ Widget makeInput({label, obsureText = false}) {
       ),
       TextField(
         style: TextStyle(color: cc.white),
+        controller: controller,
         obscureText: obsureText,
         decoration: InputDecoration(
           focusColor: cc.white,

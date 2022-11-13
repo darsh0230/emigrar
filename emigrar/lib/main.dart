@@ -1,6 +1,8 @@
 import 'package:emigrar/constants/constantColors.dart';
+import 'package:emigrar/providers/authProvider.dart';
 import 'package:emigrar/providers/utilProvider.dart';
 import 'package:emigrar/screens/auth/loginScreen.dart';
+import 'package:emigrar/screens/auth/registerScreen.dart';
 import 'package:emigrar/screens/home/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,13 +14,32 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => UtilProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => AuthProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<AuthProvider>().loadAuthCred();
+      print(context.read<AuthProvider>().userExists());
+      setState(() {});
+    });
+  }
 
   // This widget is the root of your application.
   @override
@@ -39,7 +60,10 @@ class MyApp extends StatelessWidget {
           height: 250.0,
           child: Image.asset("assets/images/logo1.png"),
         ),
-        nextScreen: const HomeScreen(),
+        // nextScreen: RegisterScreen(),
+        nextScreen: context.read<AuthProvider>().userExists()
+            ? HomeScreen()
+            : LoginScreen(),
       ),
     );
   }

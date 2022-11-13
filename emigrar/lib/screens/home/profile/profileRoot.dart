@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProfileRoot extends StatefulWidget {
   const ProfileRoot({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class _ProfileRootState extends State<ProfileRoot> {
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
-                  "Hello Darshan",
+                  "Hello Trekker",
                   style: TextStyle(
                     color: cc.white,
                     fontWeight: FontWeight.bold,
@@ -173,7 +174,12 @@ class _ProfileRootState extends State<ProfileRoot> {
                           borderRadius: BorderRadius.circular(60)),
                       padding: EdgeInsets.all(16),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Fluttertoast.showToast(
+                        msg: "Comming Soon",
+                        toastLength: Toast.LENGTH_SHORT,
+                      );
+                    },
                     child: Text(
                       '                    SOS                    ',
                       style: TextStyle(fontSize: 24),

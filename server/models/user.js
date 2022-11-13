@@ -30,6 +30,7 @@ const UserSchema = new mongoose.Schema({
     // },
     minlength: [8, "Password min length 8"],
   },
+  reward: { type: Number },
 });
 
 UserSchema.pre("save", async function () {

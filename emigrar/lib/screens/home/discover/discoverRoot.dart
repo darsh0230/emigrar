@@ -16,7 +16,14 @@ class _DiscoverRootState extends State<DiscoverRoot> {
     CC cc = CC();
     return Container(
       color: cc.black,
-      child: Text("Discover"),
+      child: Center(
+          child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          "COMING SOON",
+          style: TextStyle(fontSize: 50.0, color: cc.white),
+        ),
+      )),
     );
   }
 }

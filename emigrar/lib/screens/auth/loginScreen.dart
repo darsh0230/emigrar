@@ -1,5 +1,7 @@
 import 'package:emigrar/constants/constantColors.dart';
 import 'package:emigrar/screens/auth/registerScreen.dart';
+import 'package:emigrar/screens/home/homeScreen.dart';
+import 'package:emigrar/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -12,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     CC cc = CC();
@@ -40,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         TextField(
                           style: TextStyle(color: cc.black, fontSize: 20),
+                          controller: emailController,
                           decoration: InputDecoration(
                               fillColor: cc.white,
                               filled: true,
@@ -54,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextField(
                           style: TextStyle(color: cc.black, fontSize: 20),
                           obscureText: true,
+                          controller: passwordController,
                           decoration: InputDecoration(
                               fillColor: cc.white,
                               filled: true,
@@ -80,7 +87,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               backgroundColor: Colors.black12,
                               child: IconButton(
                                   color: cc.lBlack,
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    if (await login(emailController.text,
+                                        passwordController.text, context)) {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomeScreen()));
+                                    }
+                                  },
                                   icon: Icon(
                                     Icons.arrow_forward,
                                   )),
